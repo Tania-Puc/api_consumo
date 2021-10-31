@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, unnecessary_new, duplicate_ignore
 
 /*import 'dart:async';
 import 'dart:convert';
@@ -65,7 +65,6 @@ class Update extends StatefulWidget {
   Update({required Key key, List? listrespose}) : super(key: key);
 
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     throw UnimplementedError();
   }
 }
@@ -146,6 +145,7 @@ class EditData extends StatefulWidget {
   final List? list;
   final int index;
 
+  // ignore: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
   EditData({this.list, required this.index});
 
   @override
@@ -162,6 +162,7 @@ class _EditDataState extends State<EditData> {
   void editData() {
     var url = "https://backend-consumo.herokuapp.com/users/" +
         widget.list![widget.index]['id'].toString();
+    // ignore: avoid_print
     print(url);
     http.put(Uri.parse(url), body: {
       "email": controlleremail.text,
@@ -186,24 +187,24 @@ class _EditDataState extends State<EditData> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("EDITAR"),
+    return  Scaffold(
+      appBar:  AppBar(
+        title:  const Text("EDITAR"),
       ),
       body: Form(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
           children: <Widget>[
-            new Column(
+            Column(
               children: <Widget>[
-                new ListTile(
+                 ListTile(
                   leading: const Icon(Icons.email, color: Colors.black),
-                  title: new TextFormField(
+                  title:  TextFormField(
                     controller: controlleremail,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingresa un email";
                     },
-                    decoration: new InputDecoration(
+                    decoration:  const InputDecoration(
                       hintText: "Email",
                       labelText: "email",
                     ),
@@ -212,50 +213,51 @@ class _EditDataState extends State<EditData> {
                 const Divider(
                   height: 1.0,
                 ),
-                new ListTile(
+                 ListTile(
                   leading: const Icon(Icons.person, color: Colors.black),
-                  title: new TextFormField(
+                  title:  TextFormField(
                     controller: controllerfirst_name,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingrese su primer nombre";
                     },
-                    decoration: new InputDecoration(
+                    decoration:  const InputDecoration(
                       hintText: "First name",
                       labelText: "First name",
                     ),
                   ),
                 ),
-                new ListTile(
+                 ListTile(
                   leading: const Icon(Icons.person, color: Colors.black),
-                  title: new TextFormField(
+                  title:  TextFormField(
                     controller: controllerlast_name,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingresa su apellido";
                     },
-                    decoration: new InputDecoration(
+                    decoration:  const InputDecoration(
                       hintText: "Last name",
                       labelText: "Last name",
                     ),
                   ),
                 ),
-                new ListTile(
+                 ListTile(
                   leading: const Icon(Icons.image_rounded, color: Colors.black),
-                  title: new TextFormField(
+                  title:  TextFormField(
                     controller: controlleravatar,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingresa una url de imagen";
                     },
-                    decoration: new InputDecoration(
+                    decoration:  const InputDecoration(
                       hintText: "Url imagen",
                       labelText: "Url imagen",
                     ),
                   ),
                 ),
-                new Padding(
-                  padding: const EdgeInsets.all(10.0),
+                 const Padding(
+                  padding: EdgeInsets.all(10.0),
                 ),
-                new RaisedButton(
-                  child: new Text("Guardar"),
+                 // ignore: deprecated_member_use
+                 RaisedButton(
+                  child:  const Text("Guardar"),
                   color: Colors.blueAccent,
                   onPressed: () {
                     editData();
@@ -263,15 +265,19 @@ class _EditDataState extends State<EditData> {
                         builder: (BuildContext context) => new Home()));
                   },
                 ),
-                new RaisedButton(
-                    child: new Text("Borrar"),
+                 // ignore: deprecated_member_use
+                 RaisedButton(
+                    child:  const Text("Borrar"),
                     color: Colors.red,
                     onPressed: () {
                       var url = "https://backend-consumo.herokuapp.com/users/" +
                           widget.list![widget.index]['id'].toString();
+                      // ignore: avoid_print
                       print(url);
                       http.delete(Uri.parse(url));
+           // ignore: unnecessary_new
            Navigator.of(context).push(new MaterialPageRoute(
+                        // ignore: unnecessary_new
                         builder: (BuildContext context) => new Home()));
 
 

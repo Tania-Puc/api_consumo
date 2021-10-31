@@ -237,20 +237,24 @@ import 'package:api_consumo/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: use_key_in_widget_constructors
 class AddData extends StatefulWidget {
+
   @override
-  _AddDataState createState() => new _AddDataState();
+  _AddDataState createState() => _AddDataState();
 }
 
 class _AddDataState extends State<AddData> {
-  TextEditingController controlleremail = new TextEditingController();
-  TextEditingController controllerfirst_name = new TextEditingController();
-  TextEditingController controllerlast_name = new TextEditingController();
-  TextEditingController controlleravatar = new TextEditingController();
+  TextEditingController controlleremail =  TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController controllerfirst_name =  TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController controllerlast_name =  TextEditingController();
+  TextEditingController controlleravatar =  TextEditingController();
 
   //TextEditingController controllerNivel = new TextEditingController();
 
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   void addData() {
     var url = "https://backend-consumo.herokuapp.com/users/";
@@ -265,9 +269,9 @@ class _AddDataState extends State<AddData> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Agregar Usuarios"),
+    return  Scaffold(
+      appBar:  AppBar(
+        title: const  Text("Agregar Usuarios"),
       ),
       body: Form(
         key: _formKey,
@@ -275,83 +279,92 @@ class _AddDataState extends State<AddData> {
           padding: const EdgeInsets.all(10.0),
           child: ListView(
             children: <Widget>[
-              new Column(
+               Column(
                 children: <Widget>[
-                  new ListTile(
+                 ListTile(
                     leading: const Icon(Icons.email, color: Colors.black),
-                    title: new TextFormField(
+                    title:  TextFormField(
                       controller: controlleremail,
                       validator: (value) {
-                        if (value!.isEmpty) return "Ingresa un nombre email";
+                        if (value!.isEmpty) {return "Ingresa un nombre email";}
                       },
-                      decoration: new InputDecoration(
+                      decoration:  const InputDecoration(
                         hintText: "Email",
                         labelText: "Email",
                       ),
                     ),
                   ),
-                  new ListTile(
+                   ListTile(
                     leading: const Icon(Icons.person, color: Colors.black),
-                    title: new TextFormField(
+                    title:  TextFormField(
                       controller: controllerfirst_name,
                       validator: (value) {
-                        if (value!.isEmpty) return "Ingresa su primer nombre";
+                        if (value!.isEmpty){ return "Ingresa su primer nombre";}
                       },
-                      decoration: new InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "First namae",
                         labelText: "First name",
                       ),
                     ),
                   ),
-                  new ListTile(
+                   ListTile(
                     leading: const Icon(Icons.person, color: Colors.black),
-                    title: new TextFormField(
+                    title:  TextFormField(
                       controller: controllerlast_name,
                       validator: (value) {
-                        if (value!.isEmpty) return "Ingresa su apallido";
+                        if (value!.isEmpty) {return "Ingresa su apallido";}
                       },
-                      decoration: new InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Last name",
                         labelText: "Last_name",
                       ),
                     ),
                   ),
-                  new ListTile(
+                   ListTile(
                     leading: const Icon(Icons.image, color: Colors.black),
-                    title: new TextFormField(
+                    title:  TextFormField(
                       controller: controlleravatar,
                       validator: (value) {
-                        if (value!.isEmpty)
-                          return "Ingresa la url de una imagen";
+                        if (value!.isEmpty){
+                          {
+                           return "Ingresa la url de una imagen";}
+
+                        }
+                         
                       },
-                      decoration: new InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Url imagen",
                         labelText: "Url imagen",
                       ),
                     ),
                   ),
-                  new Padding(
-                    padding: const EdgeInsets.all(30.0),
+                  const Padding(
+                    padding: EdgeInsets.all(30.0),
                   ),
-                  new RaisedButton(
-                    child: new Text("Agregar"),
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    child: const Text("Agregar"),
                     color: Colors.blueAccent,
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         addData();
-                        Navigator.pushReplacementNamed(context, '/');
+                   Navigator.of(context).push(MaterialPageRoute(
+                          // ignore: prefer_const_constructors, unnecessary_new
+                          builder: (BuildContext context) => new Home()));
                       }
                     },
                   ),
-                  new RaisedButton(
-                    child: new Text("Salir"),
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    child: const Text("Salir"),
                     color: Colors.blueAccent,
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
                     onPressed: () {
-                      Navigator.of(context).push(new MaterialPageRoute(
+                      Navigator.of(context).push(MaterialPageRoute(
+                          // ignore: prefer_const_constructors, unnecessary_new
                           builder: (BuildContext context) => new Home()));
                     },
                   )

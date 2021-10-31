@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, duplicate_ignore
+
 /*import 'dart:html';
 
 import 'package:api_consumo/update_page.dart';
@@ -109,7 +111,10 @@ import 'dart:async';
 import 'dart:convert';
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
+  // ignore: unnecessary_new
   _HomeState createState() => new _HomeState();
 }
 
@@ -132,23 +137,28 @@ class _HomeState extends State<Home> {
         title: 'Material App',
         home: Scaffold(
           appBar: AppBar(
+            // ignore: prefer_const_constructors
             title: Text('Consumo de API'),
           ),
-          floatingActionButton: new FloatingActionButton(
-            child: new Icon(Icons.add),
-            onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
-              builder: (BuildContext context) => new AddData(),
+          floatingActionButton:  FloatingActionButton(
+            child:  Icon(Icons.add),
+            onPressed: () => Navigator.of(context).push( MaterialPageRoute(
+              builder: (BuildContext context) =>  AddData(),
             )),
           ),
-          body: new FutureBuilder<List>(
+          body:  FutureBuilder<List>(
             future: getData(),
             builder: (context, snapshot) {
+              // ignore: avoid_print
               if (snapshot.hasError) print(snapshot.error);
               return snapshot.hasData
+                  // ignore: unnecessary_new
                   ? new ItemList(
                       list: snapshot.data,
                     )
+                  // ignore: unnecessary_new
                   : new Center(
+                      // ignore: unnecessary_new
                       child: new CircularProgressIndicator(),
                     );
             },
@@ -203,27 +213,28 @@ new FutureBuilder<List>(
 
 class ItemList extends StatelessWidget {
   final List? list;
+  // ignore: use_key_in_widget_constructors
   ItemList({this.list});
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    return new ListView.builder(
+    return  ListView.builder(
       itemCount: list == null ? 0 : list!.length,
       itemBuilder: (context, i) {
-        return new Container(
+        return  Container(
           color: Colors.white,
           width: width * 8.0,
-          child: new GestureDetector(
+          child:  GestureDetector(
             onTap: () => Navigator.of(context).push(
-              new MaterialPageRoute(
-                  builder: (BuildContext context) => new EditData(
+               MaterialPageRoute(
+                  builder: (BuildContext context) =>  EditData(
                         list: list!,
                         index: i,
                       )),
             ),
-            child: new Card(
+            child:  Card(
               color: Colors.blue,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15),
