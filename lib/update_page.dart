@@ -149,134 +149,123 @@ class EditData extends StatefulWidget {
   EditData({this.list, required this.index});
 
   @override
+  // ignore: unnecessary_new
   _EditDataState createState() => new _EditDataState();
 }
 
 class _EditDataState extends State<EditData> {
-  late TextEditingController controlleremail;
-  late TextEditingController controllerfirst_name;
-  late TextEditingController controllerlast_name;
-  late TextEditingController controlleravatar;
-  late TextEditingController controllerid;
+  late TextEditingController email;
+  late TextEditingController first_name;
+  late TextEditingController last_name;
+  late TextEditingController avatar;
+  late TextEditingController id;
 
   void editData() {
     var url = "https://backend-consumo.herokuapp.com/users/" +
         widget.list![widget.index]['id'].toString();
-    print(url);
     http.put(Uri.parse(url), body: {
-      "email": controlleremail.text,
-      "first_name": controllerfirst_name.text,
-      "last_name": controllerlast_name.text,
-      "avatar": controlleravatar.text
+      "email": email.text,
+      "first_name": first_name.text,
+      "last_name": last_name.text,
+      "avatar": avatar.text
     });
   }
 
   @override
   void initState() {
-    controlleremail =
+    email =
         TextEditingController(text: widget.list![widget.index]['email']);
-    controllerfirst_name =
+    first_name =
         TextEditingController(text: widget.list![widget.index]['first_name']);
-    controllerlast_name =
+    last_name =
         TextEditingController(text: widget.list![widget.index]['last_name']);
-    controlleravatar =
+    avatar =
         TextEditingController(text: widget.list![widget.index]['avatar']);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("EDITAR"),
+    return  Scaffold(
+      appBar:  AppBar(
+        title:  const Text("EDITAR USUARIOS"),
       ),
       body: Form(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
           children: <Widget>[
-            new Column(
+             Column(
               children: <Widget>[
-                new ListTile(
-                  leading: const Icon(Icons.email, color: Colors.black),
-                  title: new TextFormField(
-                    controller: controlleremail,
-                    validator: (value) {
-                      if (value!.isEmpty) return "Ingresa un email";
-                    },
-                    decoration: new InputDecoration(
-                      hintText: "Email",
-                      labelText: "email",
+                 ListTile(
+                  title:  TextFormField(
+                    controller: email,
+                    // ignore: prefer_const_constructors
+                    decoration: InputDecoration(
+                      labelText: "CORREO",
                     ),
                   ),
                 ),
                 const Divider(
                   height: 1.0,
                 ),
-                new ListTile(
-                  leading: const Icon(Icons.person, color: Colors.black),
-                  title: new TextFormField(
-                    controller: controllerfirst_name,
-                    validator: (value) {
-                      if (value!.isEmpty) return "Ingrese su primer nombre";
-                    },
-                    decoration: new InputDecoration(
-                      hintText: "First name",
-                      labelText: "First name",
+                 ListTile(
+                  title:  TextFormField(
+                    controller: first_name,
+              
+                    // ignore: prefer_const_constructors
+                    decoration: InputDecoration(
+
+                      labelText: "NOMBRE",
                     ),
                   ),
                 ),
-                new ListTile(
-                  leading: const Icon(Icons.person, color: Colors.black),
-                  title: new TextFormField(
-                    controller: controllerlast_name,
-                    validator: (value) {
-                      if (value!.isEmpty) return "Ingresa su apellido";
-                    },
-                    decoration: new InputDecoration(
-                      hintText: "Last name",
-                      labelText: "Last name",
+                 ListTile(
+                  title:  TextFormField(
+                    controller: last_name,
+               
+                    // ignore: prefer_const_constructors
+                    decoration:  InputDecoration(
+                      labelText: "APELLIDO",
                     ),
                   ),
                 ),
-                new ListTile(
-                  leading: const Icon(Icons.image_rounded, color: Colors.black),
-                  title: new TextFormField(
-                    controller: controlleravatar,
-                    validator: (value) {
-                      if (value!.isEmpty) return "Ingresa una url de imagen";
-                    },
-                    decoration: new InputDecoration(
-                      hintText: "Url imagen",
-                      labelText: "Url imagen",
+                 ListTile(
+                  title:  TextFormField(
+                    controller: avatar,               
+                    // ignore: prefer_const_constructors
+                    decoration:  InputDecoration(
+                      labelText: "IMAGEN",
                     ),
                   ),
                 ),
-                new Padding(
-                  padding: const EdgeInsets.all(10.0),
+                const Padding(
+                  padding: EdgeInsets.all(15.0),
                 ),
-                new RaisedButton(
-                  child: new Text("Guardar"),
-                  color: Colors.blueAccent,
+                // ignore: deprecated_member_use
+                 RaisedButton(
+                  child: const Text("EDITAR"),
+                  color: Colors.greenAccent,
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
                   onPressed: () {
                     editData();
-                    Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new Home()));
+                    Navigator.of(context).push( MaterialPageRoute(
+                        builder: (BuildContext context) =>   HomePage()));
                   },
                 ),
-                new RaisedButton(
-                    child: new Text("Borrar"),
-                    color: Colors.red,
+                 // ignore: deprecated_member_use
+                 RaisedButton(
+                    child:  const Text("ELIMINAR"),
+                    color: Colors.redAccent,
+                    shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
                     onPressed: () {
+                      
                       var url = "https://backend-consumo.herokuapp.com/users/" +
                           widget.list![widget.index]['id'].toString();
-                      print(url);
                       http.delete(Uri.parse(url));
-           Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new Home()));
-
-
-
-
+           Navigator.of(context).push( MaterialPageRoute(
+                        builder: (BuildContext context) =>  HomePage()));
                     }
                     
                     

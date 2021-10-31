@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 /*import 'dart:async';
 import 'dart:convert';
 
@@ -233,24 +235,28 @@ class Album {
   }
 }*/
 
-import 'package:api_consumo/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'home_page.dart';
+
 class AddData extends StatefulWidget {
   @override
+  // ignore: unnecessary_new
   _AddDataState createState() => new _AddDataState();
 }
 
 class _AddDataState extends State<AddData> {
-  TextEditingController controlleremail = new TextEditingController();
-  TextEditingController controllerfirst_name = new TextEditingController();
-  TextEditingController controllerlast_name = new TextEditingController();
-  TextEditingController controlleravatar = new TextEditingController();
+  TextEditingController controlleremail = TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController controllerfirst_name = TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController controllerlast_name = TextEditingController();
+  TextEditingController controlleravatar = TextEditingController();
 
   //TextEditingController controllerNivel = new TextEditingController();
 
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   void addData() {
     var url = "https://backend-consumo.herokuapp.com/users/";
@@ -265,9 +271,9 @@ class _AddDataState extends State<AddData> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Agregar Usuarios"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("AGREGAR USUARIOS"),
       ),
       body: Form(
         key: _formKey,
@@ -275,86 +281,85 @@ class _AddDataState extends State<AddData> {
           padding: const EdgeInsets.all(10.0),
           child: ListView(
             children: <Widget>[
-              new Column(
+              Column(
                 children: <Widget>[
-                  new ListTile(
-                    leading: const Icon(Icons.email, color: Colors.black),
-                    title: new TextFormField(
+                  ListTile(
+                    title: TextFormField(
                       controller: controlleremail,
                       validator: (value) {
-                        if (value!.isEmpty) return "Ingresa un nombre email";
+                        if (value!.isEmpty) {
+                          return "LLENE EL CAMPO VACIO";
+                        }
                       },
-                      decoration: new InputDecoration(
-                        hintText: "Email",
-                        labelText: "Email",
+                      // ignore: prefer_const_constructors
+                      decoration: InputDecoration(
+                        labelText:"Correo"
                       ),
                     ),
                   ),
-                  new ListTile(
-                    leading: const Icon(Icons.person, color: Colors.black),
-                    title: new TextFormField(
+                  ListTile(
+                    title: TextFormField(
                       controller: controllerfirst_name,
                       validator: (value) {
-                        if (value!.isEmpty) return "Ingresa su primer nombre";
+                        if (value!.isEmpty) {
+                          return "LLENE EL CAMPO VACIO";
+                        }
                       },
-                      decoration: new InputDecoration(
-                        hintText: "First namae",
+                      // ignore: prefer_const_constructors
+                      decoration: InputDecoration(
+              
                         labelText: "First name",
                       ),
                     ),
                   ),
-                  new ListTile(
-                    leading: const Icon(Icons.person, color: Colors.black),
-                    title: new TextFormField(
+                  ListTile(
+                    title: TextFormField(
                       controller: controllerlast_name,
                       validator: (value) {
-                        if (value!.isEmpty) return "Ingresa su apallido";
+                        if (value!.isEmpty) {
+                          return "LLENE EL CAMPO VACIO";
+                        }
                       },
-                      decoration: new InputDecoration(
-                        hintText: "Last name",
+                      // ignore: prefer_const_constructors
+                      decoration: InputDecoration(
+                      
                         labelText: "Last_name",
                       ),
                     ),
                   ),
-                  new ListTile(
-                    leading: const Icon(Icons.image, color: Colors.black),
-                    title: new TextFormField(
+                  ListTile(
+                    title: TextFormField(
                       controller: controlleravatar,
                       validator: (value) {
-                        if (value!.isEmpty)
-                          return "Ingresa la url de una imagen";
+                        if (value!.isEmpty) {
+                          return "LLENE EL CAMPO VACIO";
+                        }
                       },
-                      decoration: new InputDecoration(
-                        hintText: "Url imagen",
+                      // ignore: prefer_const_constructors
+                      decoration: InputDecoration(
                         labelText: "Url imagen",
                       ),
                     ),
                   ),
-                  new Padding(
-                    padding: const EdgeInsets.all(30.0),
+                  // ignore: prefer_const_constructors
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
                   ),
-                  new RaisedButton(
-                    child: new Text("Agregar"),
-                    color: Colors.blueAccent,
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    // ignore: prefer_const_constructors
+                    child: Text("AGREGAR"),
+                    color: Colors.greenAccent,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         addData();
-                        Navigator.pushReplacementNamed(context, '/');
+               Navigator.of(context).push( MaterialPageRoute(
+                        builder: (BuildContext context) =>  HomePage()));
                       }
                     },
                   ),
-                  new RaisedButton(
-                    child: new Text("Salir"),
-                    color: Colors.blueAccent,
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
-                    onPressed: () {
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (BuildContext context) => new Home()));
-                    },
-                  )
                 ],
               ),
             ],

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, prefer_const_constructors_in_immutables, prefer_const_constructors, duplicate_ignore
+
 /*import 'dart:html';
 
 import 'package:api_consumo/update_page.dart';
@@ -108,12 +110,14 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-class Home extends StatefulWidget {
+// ignore: use_key_in_widget_constructors
+class HomePage extends StatefulWidget {
   @override
-  _HomeState createState() => new _HomeState();
+  // ignore: unnecessary_new
+  _HomePageState createState() => new _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   Future<List> getData() async {
     final response = await http
         .get(Uri.parse("https://backend-consumo.herokuapp.com/users/"));
@@ -132,19 +136,22 @@ class _HomeState extends State<Home> {
         title: 'Material App',
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Consumo de API'),
+            title: Text('API CONSUMO'),
           ),
-          floatingActionButton: new FloatingActionButton(
-            child: new Icon(Icons.add),
-            onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              // ignore: unnecessary_new
               builder: (BuildContext context) => new AddData(),
             )),
           ),
-          body: new FutureBuilder<List>(
+          body: FutureBuilder<List>(
             future: getData(),
             builder: (context, snapshot) {
+              // ignore: avoid_print
               if (snapshot.hasError) print(snapshot.error);
               return snapshot.hasData
+                  // ignore: unnecessary_new
                   ? new ItemList(
                       list: snapshot.data,
                     )
@@ -203,6 +210,7 @@ new FutureBuilder<List>(
 
 class ItemList extends StatelessWidget {
   final List? list;
+  // ignore: use_key_in_widget_constructors
   ItemList({this.list});
 
   @override
@@ -226,6 +234,7 @@ class ItemList extends StatelessWidget {
             child: new Card(
               color: Colors.blue,
               child: Container(
+                // ignore: prefer_const_constructors
                 padding: EdgeInsets.symmetric(vertical: 15),
                 child: Column(
                   children: [
