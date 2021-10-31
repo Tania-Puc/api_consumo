@@ -9,9 +9,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         debugShowCheckedModeBanner: false,
         routes: {
-          //RUTAs CON LA QUE AL TERMINAR DE CARGAR EL SPLASHSCREEN REDIRIGE A LOGIN
           '/': (context) => HomePage(),
-          //'/actualizar': (context) => Update(listrespose: listRespose),
         });
   }
 }
