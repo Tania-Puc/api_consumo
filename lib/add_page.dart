@@ -234,6 +234,7 @@ class Album {
 }*/
 
 import 'package:api_consumo/home_page.dart';
+import 'package:api_consumo/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -246,6 +247,8 @@ class AddData extends StatefulWidget {
 
 class _AddDataState extends State<AddData> {
   TextEditingController controlleremail =  TextEditingController();
+  TextEditingController controllerpass =  TextEditingController();
+
   // ignore: non_constant_identifier_names
   TextEditingController controllerfirst_name =  TextEditingController();
   // ignore: non_constant_identifier_names
@@ -257,14 +260,17 @@ class _AddDataState extends State<AddData> {
   final _formKey = GlobalKey<FormState>();
 
   void addData() {
-    var url = "https://backend-consumo.herokuapp.com/users/";
+    var url = "http://192.168.3.107:3000/users/";
 
-    http.post(Uri.parse(url), body: {
+    http.post(Uri.parse(url), body:
+     {
       "email": controlleremail.text,
+      "pass": controllerpass.text,
       "first_name": controllerfirst_name.text,
       "last_name": controllerlast_name.text,
       "avatar": controlleravatar.text,
-    });
+    }
+    );
   }
 
   @override
@@ -291,6 +297,19 @@ class _AddDataState extends State<AddData> {
                       decoration:  const InputDecoration(
                         hintText: "Email",
                         labelText: "Email",
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.lock_clock_outlined, color: Colors.black),
+                    title:  TextFormField(
+                      controller: controllerpass,
+                      validator: (value) {
+                        if (value!.isEmpty) {return "Ingresa tu contraseña";}
+                      },
+                      decoration:  const InputDecoration(
+                        hintText: "Contraseña",
+                        labelText: "Contraseña",
                       ),
                     ),
                   ),
@@ -352,7 +371,7 @@ class _AddDataState extends State<AddData> {
                         addData();
                    Navigator.of(context).push(MaterialPageRoute(
                           // ignore: prefer_const_constructors, unnecessary_new
-                          builder: (BuildContext context) => new Home()));
+                          builder: (BuildContext context) => new Home(id: id,)));
                       }
                     },
                   ),
@@ -365,7 +384,7 @@ class _AddDataState extends State<AddData> {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           // ignore: prefer_const_constructors, unnecessary_new
-                          builder: (BuildContext context) => new Home()));
+                          builder: (BuildContext context) => new Home(id:id)));
                     },
                   )
                 ],

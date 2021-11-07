@@ -103,7 +103,9 @@ class _HomePageState extends State<HomePage> {
   }
 }
 */
+
 import 'package:api_consumo/add_page.dart';
+import 'package:api_consumo/login_page.dart';
 import 'package:api_consumo/update_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -111,8 +113,9 @@ import 'dart:async';
 import 'dart:convert';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key, required this.id}) : super(key: key);
 
+  final int id;
   @override
   // ignore: unnecessary_new
   _HomeState createState() => new _HomeState();
@@ -120,8 +123,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Future<List> getData() async {
-    final response = await http
-        .get(Uri.parse("https://backend-consumo.herokuapp.com/users/"));
+    print(id);
+    final response =
+        await http.get(Uri.parse("http://192.168.3.107:3000/users/"+id.toString()));
     return json.decode(response.body);
   }
 
@@ -140,13 +144,13 @@ class _HomeState extends State<Home> {
             // ignore: prefer_const_constructors
             title: Text('Consumo de API'),
           ),
-          floatingActionButton:  FloatingActionButton(
-            child:  Icon(Icons.add),
-            onPressed: () => Navigator.of(context).push( MaterialPageRoute(
-              builder: (BuildContext context) =>  AddData(),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => AddData(),
             )),
           ),
-          body:  FutureBuilder<List>(
+          body: FutureBuilder<List>(
             future: getData(),
             builder: (context, snapshot) {
               // ignore: avoid_print
@@ -220,21 +224,21 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    return  ListView.builder(
+    return ListView.builder(
       itemCount: list == null ? 0 : list!.length,
       itemBuilder: (context, i) {
-        return  Container(
+        return Container(
           color: Colors.white,
           width: width * 8.0,
-          child:  GestureDetector(
+          child: GestureDetector(
             onTap: () => Navigator.of(context).push(
-               MaterialPageRoute(
-                  builder: (BuildContext context) =>  EditData(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => EditData(
                         list: list!,
                         index: i,
                       )),
             ),
-            child:  Card(
+            child: Card(
               color: Colors.blue,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15),

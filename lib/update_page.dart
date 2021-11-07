@@ -136,6 +136,7 @@ class _UpdateState extends State<Update> {
 }
 */
 
+import 'package:api_consumo/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -154,18 +155,20 @@ class EditData extends StatefulWidget {
 
 class _EditDataState extends State<EditData> {
   late TextEditingController controlleremail;
+  late TextEditingController controllerpass;
   late TextEditingController controllerfirst_name;
   late TextEditingController controllerlast_name;
   late TextEditingController controlleravatar;
   late TextEditingController controllerid;
 
   void editData() {
-    var url = "https://backend-consumo.herokuapp.com/users/" +
+    var url = "http://192.168.3.107:3000/users/" +
         widget.list![widget.index]['id'].toString();
     // ignore: avoid_print
     print(url);
     http.put(Uri.parse(url), body: {
       "email": controlleremail.text,
+      "pass":controllerpass.text,
       "first_name": controllerfirst_name.text,
       "last_name": controllerlast_name.text,
       "avatar": controlleravatar.text
@@ -176,6 +179,8 @@ class _EditDataState extends State<EditData> {
   void initState() {
     controlleremail =
         TextEditingController(text: widget.list![widget.index]['email']);
+            controllerpass =
+        TextEditingController(text: widget.list![widget.index]['pass']);
     controllerfirst_name =
         TextEditingController(text: widget.list![widget.index]['first_name']);
     controllerlast_name =
@@ -207,6 +212,22 @@ class _EditDataState extends State<EditData> {
                     decoration:  const InputDecoration(
                       hintText: "Email",
                       labelText: "email",
+                    ),
+                  ),
+                ),
+                const Divider(
+                  height: 1.0,
+                ),
+                                 ListTile(
+                  leading: const Icon(Icons.email, color: Colors.black),
+                  title:  TextFormField(
+                    controller: controllerpass,
+                    validator: (value) {
+                      if (value!.isEmpty) return "Ingresa contraseña";
+                    },
+                    decoration:  const InputDecoration(
+                      hintText: "contraseña",
+                      labelText: "contraseña",
                     ),
                   ),
                 ),
@@ -262,7 +283,7 @@ class _EditDataState extends State<EditData> {
                   onPressed: () {
                     editData();
                     Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new Home()));
+                        builder: (BuildContext context) => new Home(id:id)));
                   },
                 ),
                  // ignore: deprecated_member_use
@@ -270,7 +291,7 @@ class _EditDataState extends State<EditData> {
                     child:  const Text("Borrar"),
                     color: Colors.red,
                     onPressed: () {
-                      var url = "https://backend-consumo.herokuapp.com/users/" +
+                      var url = "http://192.168.3.107:3000/users/" +
                           widget.list![widget.index]['id'].toString();
                       // ignore: avoid_print
                       print(url);
@@ -278,7 +299,7 @@ class _EditDataState extends State<EditData> {
            // ignore: unnecessary_new
            Navigator.of(context).push(new MaterialPageRoute(
                         // ignore: unnecessary_new
-                        builder: (BuildContext context) => new Home()));
+                        builder: (BuildContext context) => new Home(id:id)));
 
 
 
