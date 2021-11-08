@@ -31,10 +31,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Material App',
+        title: 'Usuario',
         home: Scaffold(
           appBar: AppBar(
-            title: const Text('API CONSUMO'),
+            title: const Text('Usuario'),
           ),
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
