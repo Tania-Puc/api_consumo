@@ -31,10 +31,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Usuario',
+        title: 'Bienvenido',
         home: Scaffold(
           appBar: AppBar(
-            title: const Text('Usuario'),
+            title: const Text('Bienvenido'),
           ),
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
@@ -60,6 +60,25 @@ class _HomePageState extends State<HomePage> {
                     );
             },
           ),
+
+bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map_outlined),
+            label: 'Mapa',
+          ),
+
+        ],
+ 
+      ),
+    
+
+
+
         ));
   }
 }

@@ -38,7 +38,7 @@ class _AddDataState extends State<AddData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("AGREGAR USUARIOS"),
+        title: const Text("Registrarse"),
       ),
       body: Form(
         key: _formKey,
@@ -73,7 +73,7 @@ class _AddDataState extends State<AddData> {
                       // ignore: prefer_const_constructors
                       decoration: InputDecoration(
               
-                        labelText: "First name",
+                        labelText: "Nombre",
                       ),
                     ),
                   ),
@@ -88,7 +88,7 @@ class _AddDataState extends State<AddData> {
                       // ignore: prefer_const_constructors
                       decoration: InputDecoration(
                       
-                        labelText: "Last_name",
+                        labelText: "Apellido",
                       ),
                     ),
                   ),
@@ -102,7 +102,7 @@ class _AddDataState extends State<AddData> {
                       },
                       // ignore: prefer_const_constructors
                       decoration: InputDecoration(
-                        labelText: "Url imagen",
+                        labelText: "Url foto",
                       ),
                     ),
                   ),
@@ -113,7 +113,7 @@ class _AddDataState extends State<AddData> {
                   // ignore: deprecated_member_use
                   RaisedButton(
                     // ignore: prefer_const_constructors
-                    child: Text("AGREGAR"),
+                    child: Text("Registrarme"),
                     color: Colors.greenAccent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),
