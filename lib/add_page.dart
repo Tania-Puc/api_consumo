@@ -371,7 +371,7 @@ class _AddDataState extends State<AddData> {
                         addData();
                    Navigator.of(context).push(MaterialPageRoute(
                           // ignore: prefer_const_constructors, unnecessary_new
-                          builder: (BuildContext context) => new Home(id: id,)));
+                          builder: (BuildContext context) => new Home(id: id)));
                       }
                     },
                   ),
@@ -384,7 +384,7 @@ class _AddDataState extends State<AddData> {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           // ignore: prefer_const_constructors, unnecessary_new
-                          builder: (BuildContext context) => new Home(id:id)));
+                          builder: (BuildContext context) => new LoginPage()));
                     },
                   )
                 ],

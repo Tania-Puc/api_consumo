@@ -4,7 +4,8 @@ import 'package:api_consumo/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-late  int id;
+late int id;
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController user = new TextEditingController();
-  TextEditingController pass = new TextEditingController();
+  TextEditingController password = new TextEditingController();
 
   String msg = '';
 
@@ -23,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     var url = "http://192.168.3.107:3000/users/";
     final response = await http.post(Uri.parse(url), body: {
       "email": user.text,
-      "pass": pass.text,
+      "pass": password.text,
     });
 
     var datauser = json.decode(response.body);
@@ -33,13 +34,18 @@ class _LoginPageState extends State<LoginPage> {
         msg = "Login Fail";
       });
     } else {
-      Navigator.of(context).push(MaterialPageRoute(
-          // ignore: unnecessary_new
-          builder: (BuildContext context) => Home(id:id)));
-
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (BuildContext context) => Home(
+                  id: id,
+                
+                )),
+      );
       setState(() {
         id = datauser[0]['id'];
-      });
+
+        
+              });
     }
 
     return datauser;
@@ -68,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(fontSize: 18.0),
               ),
               TextField(
-                controller: pass,
+                controller: password,
                 obscureText: true,
                 decoration: InputDecoration(hintText: 'Password'),
               ),
@@ -78,6 +84,13 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text("Login"),
                 onPressed: () {
                   _login();
+                },
+              ),
+              // ignore: deprecated_member_use
+              RaisedButton(
+                child: Text("Sing up"),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/register');
                 },
               ),
 

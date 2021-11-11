@@ -145,9 +145,10 @@ import 'home_page.dart';
 class EditData extends StatefulWidget {
   final List? list;
   final int index;
+  final int id;
 
   // ignore: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
-  EditData({this.list, required this.index});
+  EditData({this.list, required this.index, required this.id});
 
   @override
   _EditDataState createState() => new _EditDataState();
@@ -162,13 +163,12 @@ class _EditDataState extends State<EditData> {
   late TextEditingController controllerid;
 
   void editData() {
-    var url = "http://192.168.3.107:3000/users/" +
-        widget.list![widget.index]['id'].toString();
+    var url = "http://192.168.3.107:3000/users/" + id.toString();
     // ignore: avoid_print
     print(url);
     http.put(Uri.parse(url), body: {
       "email": controlleremail.text,
-      "pass":controllerpass.text,
+      "pass": controllerpass.text,
       "first_name": controllerfirst_name.text,
       "last_name": controllerlast_name.text,
       "avatar": controlleravatar.text
@@ -179,7 +179,7 @@ class _EditDataState extends State<EditData> {
   void initState() {
     controlleremail =
         TextEditingController(text: widget.list![widget.index]['email']);
-            controllerpass =
+    controllerpass =
         TextEditingController(text: widget.list![widget.index]['pass']);
     controllerfirst_name =
         TextEditingController(text: widget.list![widget.index]['first_name']);
@@ -192,9 +192,9 @@ class _EditDataState extends State<EditData> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar:  AppBar(
-        title:  const Text("EDITAR"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("EDITAR"),
       ),
       body: Form(
         child: ListView(
@@ -202,14 +202,14 @@ class _EditDataState extends State<EditData> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                 ListTile(
+                ListTile(
                   leading: const Icon(Icons.email, color: Colors.black),
-                  title:  TextFormField(
+                  title: TextFormField(
                     controller: controlleremail,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingresa un email";
                     },
-                    decoration:  const InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Email",
                       labelText: "email",
                     ),
@@ -218,14 +218,14 @@ class _EditDataState extends State<EditData> {
                 const Divider(
                   height: 1.0,
                 ),
-                                 ListTile(
+                ListTile(
                   leading: const Icon(Icons.email, color: Colors.black),
-                  title:  TextFormField(
+                  title: TextFormField(
                     controller: controllerpass,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingresa contraseña";
                     },
-                    decoration:  const InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "contraseña",
                       labelText: "contraseña",
                     ),
@@ -234,61 +234,61 @@ class _EditDataState extends State<EditData> {
                 const Divider(
                   height: 1.0,
                 ),
-                 ListTile(
+                ListTile(
                   leading: const Icon(Icons.person, color: Colors.black),
-                  title:  TextFormField(
+                  title: TextFormField(
                     controller: controllerfirst_name,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingrese su primer nombre";
                     },
-                    decoration:  const InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "First name",
                       labelText: "First name",
                     ),
                   ),
                 ),
-                 ListTile(
+                ListTile(
                   leading: const Icon(Icons.person, color: Colors.black),
-                  title:  TextFormField(
+                  title: TextFormField(
                     controller: controllerlast_name,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingresa su apellido";
                     },
-                    decoration:  const InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Last name",
                       labelText: "Last name",
                     ),
                   ),
                 ),
-                 ListTile(
+                ListTile(
                   leading: const Icon(Icons.image_rounded, color: Colors.black),
-                  title:  TextFormField(
+                  title: TextFormField(
                     controller: controlleravatar,
                     validator: (value) {
                       if (value!.isEmpty) return "Ingresa una url de imagen";
                     },
-                    decoration:  const InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Url imagen",
                       labelText: "Url imagen",
                     ),
                   ),
                 ),
-                 const Padding(
+                const Padding(
                   padding: EdgeInsets.all(10.0),
                 ),
-                 // ignore: deprecated_member_use
-                 RaisedButton(
-                  child:  const Text("Guardar"),
+                // ignore: deprecated_member_use
+                RaisedButton(
+                  child: const Text("Guardar"),
                   color: Colors.blueAccent,
                   onPressed: () {
                     editData();
                     Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new Home(id:id)));
+                        builder: (BuildContext context) => new Home(id: id)));
                   },
                 ),
-                 // ignore: deprecated_member_use
-                 RaisedButton(
-                    child:  const Text("Borrar"),
+                // ignore: deprecated_member_use
+                RaisedButton(
+                    child: const Text("Borrar"),
                     color: Colors.red,
                     onPressed: () {
                       var url = "http://192.168.3.107:3000/users/" +
@@ -296,19 +296,11 @@ class _EditDataState extends State<EditData> {
                       // ignore: avoid_print
                       print(url);
                       http.delete(Uri.parse(url));
-           // ignore: unnecessary_new
-           Navigator.of(context).push(new MaterialPageRoute(
-                        // ignore: unnecessary_new
-                        builder: (BuildContext context) => new Home(id:id)));
-
-
-
-
-                    }
-                    
-                    
-                    )
-                    ,
+                      // ignore: unnecessary_new
+                      Navigator.of(context).push(new MaterialPageRoute(
+                          // ignore: unnecessary_new
+                          builder: (BuildContext context) => new Home(id: id)));
+                    }),
               ],
             ),
           ],
