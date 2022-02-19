@@ -192,53 +192,6 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   );
-
-                  /*
-                  showDialog(
-                      context: context,
-                      builder: (buildcontext) {
-                        return AlertDialog(
-                          content: Text(
-                            "Esta Seguro de Eliminar Su Cuenta " +
-                                args.first_name,
-                            style: const TextStyle(
-                                fontFamily: 'OpenSans',
-                                fontWeight: FontWeight.bold),
-                          ),
-                          actions: <Widget>[
-                            // ignore: deprecated_member_use
-                            RaisedButton(
-                              color: const Color(0xFF81C784),
-                              child: const Text(
-                                "Cerrar",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OpenSans',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            // ignore: deprecated_member_use
-                            RaisedButton(
-                              color: const Color(0xFF4CAF50),
-                              child: const Text(
-                                "Acepto",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OpenSans',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onPressed: () {
-                                // ignore: unused_local_variable
-                                Future listapost = fetchPost3(context, id);
-                              },
-                            )
-                          ],
-                        );
-                      });
-                      */
                 }),
               const Divider(),
 
